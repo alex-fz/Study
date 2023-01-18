@@ -1,10 +1,13 @@
 import pandas as pd
-import numpy as np
 import json
 import os
 import datetime
 from random import randint
 from string import ascii_uppercase
+from email.message import EmailMessage
+import mimetypes
+import smtplib
+import getpass
 
 
 def create_dates() -> list:
@@ -54,7 +57,78 @@ def add_content_df(data_frame: pd.DataFrame) -> pd.DataFrame:
 
 
 def edit_data_df(data_frame: pd.DataFrame) -> pd.DataFrame:
-    pass
+
+    cols = data_frame.columns
+    add = 100
+    for c in cols:
+        data_frame[c] += add
+
+    return data_frame
+
+
+def turn_into_json(data_frame: pd.DataFrame) -> json:
+
+    json_1 = data_frame.to_json()
+    return json_1
+
+
+def json_to_file(json_file: str, name_file: str) -> str:
+    assert type(name_file) == str, "The name should be an string"
+
+    path_to_file = os.path.join(os.path.dirname(__file__), name_file + ".json")
+
+    if os.path.exists(path_to_file):
+        raise FileExistsError("This file already exists, input another name")
+
+
+    new_json = json.loads(json_file)
+    with open(file=path_to_file, mode="w") as file:
+        json.dump(new_json, file, indent=4)
+        print("json file created")
+
+    return path_to_file
+
+
+def send_email(path_attachment: str, sender_, recipient_) -> bool:
+
+    ### Create message
+    message = EmailMessage()
+
+    sender, recipient = sender_, recipient_
+    subject, body = "No subject", "No body"  # change this variable for add subject or body
+
+    message["From"] = sender
+    message["To"] = recipient
+    message["Subject"] = subject
+    message.set_content(body)
+
+    type_m, _ = mimetypes.guess_type(path_attachment)
+    type_m, type_s = type_m.split("/", 1)
+
+    with open(file=path_attachment, mode="rb") as file:
+        message.add_attachment(file.read(),
+                               maintype=type_m,
+                               subtype=type_s,
+                               filename=os.path.basename(path_attachment))
+
+
+    ### send email through smtp server
+
+    try:
+        email_server = smtplib.SMTP_SSL("smtp.gmail.com", port=465)
+        email = input("Type email: ")
+        password = getpass.getpass(prompt="Type password: ")
+        email_server.login(user=email, password=password)
+        email_server.send_message(message)
+        email_server.quit()
+        return True
+
+    except smtplib.SMTPException:
+        print("Error ocurred")
+        return False
+
+
+
 
 
 if __name__ == "__main__":
@@ -64,9 +138,15 @@ if __name__ == "__main__":
 
     test_data_frame = empty_data_frame(dict_of_dates=test_dict)
 
-    print(add_content_df(data_frame=test_data_frame))
+    test_data_frame = add_content_df(data_frame=test_data_frame)
 
+    test_data_frame = edit_data_df(data_frame=test_data_frame)
 
+    json_test = turn_into_json(data_frame=test_data_frame)
+
+    path = json_to_file(json_test, "Test1")
+
+    send_email(path_attachment=path, sender_="", recipient_="") ### BORRAR
 
 
 
