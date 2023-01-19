@@ -9,6 +9,6 @@ array = array.reshape(10,5)
 
 new_arr = np.identity(5)
 
-df = pd.DataFrame(data=new_arr, dtype=int)
+df = pd.DataFrame(data=new_arr, dtype=object)
 print(df)
 
