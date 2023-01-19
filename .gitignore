@@ -2,5 +2,6 @@
 
 ## Dirs to ignore
 .idea/
+venv/
 
 ## Files to ignore

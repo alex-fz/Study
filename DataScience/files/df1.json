@@ -1,0 +1,62 @@
+{
+  "A": [
+    "SumValues: 460",
+    "MeanColumn: 46.0",
+    "MinValue: 1",
+    "MaxValue: 91"
+  ],
+  "B": [
+    "SumValues: 470",
+    "MeanColumn: 47.0",
+    "MinValue: 2",
+    "MaxValue: 92"
+  ],
+  "C": [
+    "SumValues: 480",
+    "MeanColumn: 48.0",
+    "MinValue: 3",
+    "MaxValue: 93"
+  ],
+  "D": [
+    "SumValues: 490",
+    "MeanColumn: 49.0",
+    "MinValue: 4",
+    "MaxValue: 94"
+  ],
+  "E": [
+    "SumValues: 500",
+    "MeanColumn: 50.0",
+    "MinValue: 5",
+    "MaxValue: 95"
+  ],
+  "F": [
+    "SumValues: 510",
+    "MeanColumn: 51.0",
+    "MinValue: 6",
+    "MaxValue: 96"
+  ],
+  "G": [
+    "SumValues: 520",
+    "MeanColumn: 52.0",
+    "MinValue: 7",
+    "MaxValue: 97"
+  ],
+  "H": [
+    "SumValues: 530",
+    "MeanColumn: 53.0",
+    "MinValue: 8",
+    "MaxValue: 98"
+  ],
+  "I": [
+    "SumValues: 540",
+    "MeanColumn: 54.0",
+    "MinValue: 9",
+    "MaxValue: 99"
+  ],
+  "J": [
+    "SumValues: 550",
+    "MeanColumn: 55.0",
+    "MinValue: 10",
+    "MaxValue: 100"
+  ]
+}
